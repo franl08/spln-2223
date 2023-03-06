@@ -1,0 +1,35 @@
+1.
+	Areas
+	- Semioloxía
+	- Patoloxías
+	Languages
+	* ga
+		- ambliopia (f | pop)
+		- ollo vago (m | pop)
+		- ollo preguiceiro (m | pop)
+	* es
+		- ambliopia
+		- ojo vago
+	* en 
+		- emblyopia
+		- lazy eye
+	* pt
+		- ambliopia
+		- olho preguiçoso
+2. 
+	Areas 
+	- Patoloxias
+	Languages:
+	* ga 
+		- anemia ferropenica (f | pop)
+	* "es"
+		- anemia ferropenica
+	* "en"
+		- hipoferric anemia 
+		- iron deficiency anemia
+	* "pt"
+		- anemia ferropenica
+			+ Pt
+		- anemia ferropriva 
+			+ Br
+	

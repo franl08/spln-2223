@@ -1,0 +1,498 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> dic
+Rule 1     dic -> concepts
+Rule 2     concepts -> concept concepts
+Rule 3     concepts -> concept
+Rule 4     concept -> ID_CONCEPT . SEP areas SEP langs
+Rule 5     areas -> ID_AREAS name_areas
+Rule 6     name_areas -> SEP - WORDS name_areas
+Rule 7     name_areas -> SEP - WORDS
+Rule 8     langs -> ID_LANGS type_lang
+Rule 9     type_lang -> SEP * ID_LANG terms
+Rule 10    terms -> SEP2 - WORDS qual_term var_country terms
+Rule 11    terms -> SEP2 - WORDS qual_term var_country
+Rule 12    terms -> SEP2 - WORDS qual_term terms
+Rule 13    terms -> SEP2 - WORDS qual_term
+Rule 14    terms -> SEP2 - WORDS var_country terms
+Rule 15    terms -> SEP2 - WORDS var_country
+Rule 16    terms -> SEP2 - WORDS terms
+Rule 17    terms -> SEP2 - WORDS
+Rule 18    qual_term -> ( GENDER | TYPE_TERM )
+Rule 19    qual_term -> ( GENDER )
+Rule 20    var_country -> SEP3 + ID_COUNTRY
+
+Terminals, with rules where they appear
+
+(                    : 18 19
+)                    : 18 19
+*                    : 9
++                    : 20
+-                    : 6 7 10 11 12 13 14 15 16 17
+.                    : 4
+GENDER               : 18 19
+ID_AREAS             : 5
+ID_CONCEPT           : 4
+ID_COUNTRY           : 20
+ID_LANG              : 9
+ID_LANGS             : 8
+SEP                  : 4 4 6 7 9
+SEP2                 : 10 11 12 13 14 15 16 17
+SEP3                 : 20
+TYPE_TERM            : 18
+WORDS                : 6 7 10 11 12 13 14 15 16 17
+error                : 
+|                    : 18
+
+Nonterminals, with rules where they appear
+
+areas                : 4
+concept              : 2 3
+concepts             : 1 2
+dic                  : 0
+langs                : 4
+name_areas           : 5 6
+qual_term            : 10 11 12 13
+terms                : 9 10 12 14 16
+type_lang            : 8
+var_country          : 10 11 14 15
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . dic
+    (1) dic -> . concepts
+    (2) concepts -> . concept concepts
+    (3) concepts -> . concept
+    (4) concept -> . ID_CONCEPT . SEP areas SEP langs
+
+    ID_CONCEPT      shift and go to state 4
+
+    dic                            shift and go to state 1
+    concepts                       shift and go to state 2
+    concept                        shift and go to state 3
+
+state 1
+
+    (0) S' -> dic .
+
+
+
+state 2
+
+    (1) dic -> concepts .
+
+    $end            reduce using rule 1 (dic -> concepts .)
+
+
+state 3
+
+    (2) concepts -> concept . concepts
+    (3) concepts -> concept .
+    (2) concepts -> . concept concepts
+    (3) concepts -> . concept
+    (4) concept -> . ID_CONCEPT . SEP areas SEP langs
+
+    $end            reduce using rule 3 (concepts -> concept .)
+    ID_CONCEPT      shift and go to state 4
+
+    concept                        shift and go to state 3
+    concepts                       shift and go to state 5
+
+state 4
+
+    (4) concept -> ID_CONCEPT . . SEP areas SEP langs
+
+    .               shift and go to state 6
+
+
+state 5
+
+    (2) concepts -> concept concepts .
+
+    $end            reduce using rule 2 (concepts -> concept concepts .)
+
+
+state 6
+
+    (4) concept -> ID_CONCEPT . . SEP areas SEP langs
+
+    SEP             shift and go to state 7
+
+
+state 7
+
+    (4) concept -> ID_CONCEPT . SEP . areas SEP langs
+    (5) areas -> . ID_AREAS name_areas
+
+    ID_AREAS        shift and go to state 9
+
+    areas                          shift and go to state 8
+
+state 8
+
+    (4) concept -> ID_CONCEPT . SEP areas . SEP langs
+
+    SEP             shift and go to state 10
+
+
+state 9
+
+    (5) areas -> ID_AREAS . name_areas
+    (6) name_areas -> . SEP - WORDS name_areas
+    (7) name_areas -> . SEP - WORDS
+
+    SEP             shift and go to state 12
+
+    name_areas                     shift and go to state 11
+
+state 10
+
+    (4) concept -> ID_CONCEPT . SEP areas SEP . langs
+    (8) langs -> . ID_LANGS type_lang
+
+    ID_LANGS        shift and go to state 14
+
+    langs                          shift and go to state 13
+
+state 11
+
+    (5) areas -> ID_AREAS name_areas .
+
+    SEP             reduce using rule 5 (areas -> ID_AREAS name_areas .)
+
+
+state 12
+
+    (6) name_areas -> SEP . - WORDS name_areas
+    (7) name_areas -> SEP . - WORDS
+
+    -               shift and go to state 15
+
+
+state 13
+
+    (4) concept -> ID_CONCEPT . SEP areas SEP langs .
+
+    ID_CONCEPT      reduce using rule 4 (concept -> ID_CONCEPT . SEP areas SEP langs .)
+    $end            reduce using rule 4 (concept -> ID_CONCEPT . SEP areas SEP langs .)
+
+
+state 14
+
+    (8) langs -> ID_LANGS . type_lang
+    (9) type_lang -> . SEP * ID_LANG terms
+
+    SEP             shift and go to state 17
+
+    type_lang                      shift and go to state 16
+
+state 15
+
+    (6) name_areas -> SEP - . WORDS name_areas
+    (7) name_areas -> SEP - . WORDS
+
+    WORDS           shift and go to state 18
+
+
+state 16
+
+    (8) langs -> ID_LANGS type_lang .
+
+    ID_CONCEPT      reduce using rule 8 (langs -> ID_LANGS type_lang .)
+    $end            reduce using rule 8 (langs -> ID_LANGS type_lang .)
+
+
+state 17
+
+    (9) type_lang -> SEP . * ID_LANG terms
+
+    *               shift and go to state 19
+
+
+state 18
+
+    (6) name_areas -> SEP - WORDS . name_areas
+    (7) name_areas -> SEP - WORDS .
+    (6) name_areas -> . SEP - WORDS name_areas
+    (7) name_areas -> . SEP - WORDS
+
+  ! shift/reduce conflict for SEP resolved as shift
+    SEP             shift and go to state 12
+
+  ! SEP             [ reduce using rule 7 (name_areas -> SEP - WORDS .) ]
+
+    name_areas                     shift and go to state 20
+
+state 19
+
+    (9) type_lang -> SEP * . ID_LANG terms
+
+    ID_LANG         shift and go to state 21
+
+
+state 20
+
+    (6) name_areas -> SEP - WORDS name_areas .
+
+    SEP             reduce using rule 6 (name_areas -> SEP - WORDS name_areas .)
+
+
+state 21
+
+    (9) type_lang -> SEP * ID_LANG . terms
+    (10) terms -> . SEP2 - WORDS qual_term var_country terms
+    (11) terms -> . SEP2 - WORDS qual_term var_country
+    (12) terms -> . SEP2 - WORDS qual_term terms
+    (13) terms -> . SEP2 - WORDS qual_term
+    (14) terms -> . SEP2 - WORDS var_country terms
+    (15) terms -> . SEP2 - WORDS var_country
+    (16) terms -> . SEP2 - WORDS terms
+    (17) terms -> . SEP2 - WORDS
+
+    SEP2            shift and go to state 23
+
+    terms                          shift and go to state 22
+
+state 22
+
+    (9) type_lang -> SEP * ID_LANG terms .
+
+    ID_CONCEPT      reduce using rule 9 (type_lang -> SEP * ID_LANG terms .)
+    $end            reduce using rule 9 (type_lang -> SEP * ID_LANG terms .)
+
+
+state 23
+
+    (10) terms -> SEP2 . - WORDS qual_term var_country terms
+    (11) terms -> SEP2 . - WORDS qual_term var_country
+    (12) terms -> SEP2 . - WORDS qual_term terms
+    (13) terms -> SEP2 . - WORDS qual_term
+    (14) terms -> SEP2 . - WORDS var_country terms
+    (15) terms -> SEP2 . - WORDS var_country
+    (16) terms -> SEP2 . - WORDS terms
+    (17) terms -> SEP2 . - WORDS
+
+    -               shift and go to state 24
+
+
+state 24
+
+    (10) terms -> SEP2 - . WORDS qual_term var_country terms
+    (11) terms -> SEP2 - . WORDS qual_term var_country
+    (12) terms -> SEP2 - . WORDS qual_term terms
+    (13) terms -> SEP2 - . WORDS qual_term
+    (14) terms -> SEP2 - . WORDS var_country terms
+    (15) terms -> SEP2 - . WORDS var_country
+    (16) terms -> SEP2 - . WORDS terms
+    (17) terms -> SEP2 - . WORDS
+
+    WORDS           shift and go to state 25
+
+
+state 25
+
+    (10) terms -> SEP2 - WORDS . qual_term var_country terms
+    (11) terms -> SEP2 - WORDS . qual_term var_country
+    (12) terms -> SEP2 - WORDS . qual_term terms
+    (13) terms -> SEP2 - WORDS . qual_term
+    (14) terms -> SEP2 - WORDS . var_country terms
+    (15) terms -> SEP2 - WORDS . var_country
+    (16) terms -> SEP2 - WORDS . terms
+    (17) terms -> SEP2 - WORDS .
+    (18) qual_term -> . ( GENDER | TYPE_TERM )
+    (19) qual_term -> . ( GENDER )
+    (20) var_country -> . SEP3 + ID_COUNTRY
+    (10) terms -> . SEP2 - WORDS qual_term var_country terms
+    (11) terms -> . SEP2 - WORDS qual_term var_country
+    (12) terms -> . SEP2 - WORDS qual_term terms
+    (13) terms -> . SEP2 - WORDS qual_term
+    (14) terms -> . SEP2 - WORDS var_country terms
+    (15) terms -> . SEP2 - WORDS var_country
+    (16) terms -> . SEP2 - WORDS terms
+    (17) terms -> . SEP2 - WORDS
+
+    ID_CONCEPT      reduce using rule 17 (terms -> SEP2 - WORDS .)
+    $end            reduce using rule 17 (terms -> SEP2 - WORDS .)
+    (               shift and go to state 29
+    SEP3            shift and go to state 30
+    SEP2            shift and go to state 23
+
+    qual_term                      shift and go to state 26
+    var_country                    shift and go to state 27
+    terms                          shift and go to state 28
+
+state 26
+
+    (10) terms -> SEP2 - WORDS qual_term . var_country terms
+    (11) terms -> SEP2 - WORDS qual_term . var_country
+    (12) terms -> SEP2 - WORDS qual_term . terms
+    (13) terms -> SEP2 - WORDS qual_term .
+    (20) var_country -> . SEP3 + ID_COUNTRY
+    (10) terms -> . SEP2 - WORDS qual_term var_country terms
+    (11) terms -> . SEP2 - WORDS qual_term var_country
+    (12) terms -> . SEP2 - WORDS qual_term terms
+    (13) terms -> . SEP2 - WORDS qual_term
+    (14) terms -> . SEP2 - WORDS var_country terms
+    (15) terms -> . SEP2 - WORDS var_country
+    (16) terms -> . SEP2 - WORDS terms
+    (17) terms -> . SEP2 - WORDS
+
+    ID_CONCEPT      reduce using rule 13 (terms -> SEP2 - WORDS qual_term .)
+    $end            reduce using rule 13 (terms -> SEP2 - WORDS qual_term .)
+    SEP3            shift and go to state 30
+    SEP2            shift and go to state 23
+
+    var_country                    shift and go to state 31
+    terms                          shift and go to state 32
+
+state 27
+
+    (14) terms -> SEP2 - WORDS var_country . terms
+    (15) terms -> SEP2 - WORDS var_country .
+    (10) terms -> . SEP2 - WORDS qual_term var_country terms
+    (11) terms -> . SEP2 - WORDS qual_term var_country
+    (12) terms -> . SEP2 - WORDS qual_term terms
+    (13) terms -> . SEP2 - WORDS qual_term
+    (14) terms -> . SEP2 - WORDS var_country terms
+    (15) terms -> . SEP2 - WORDS var_country
+    (16) terms -> . SEP2 - WORDS terms
+    (17) terms -> . SEP2 - WORDS
+
+    ID_CONCEPT      reduce using rule 15 (terms -> SEP2 - WORDS var_country .)
+    $end            reduce using rule 15 (terms -> SEP2 - WORDS var_country .)
+    SEP2            shift and go to state 23
+
+    terms                          shift and go to state 33
+
+state 28
+
+    (16) terms -> SEP2 - WORDS terms .
+
+    ID_CONCEPT      reduce using rule 16 (terms -> SEP2 - WORDS terms .)
+    $end            reduce using rule 16 (terms -> SEP2 - WORDS terms .)
+
+
+state 29
+
+    (18) qual_term -> ( . GENDER | TYPE_TERM )
+    (19) qual_term -> ( . GENDER )
+
+    GENDER          shift and go to state 34
+
+
+state 30
+
+    (20) var_country -> SEP3 . + ID_COUNTRY
+
+    +               shift and go to state 35
+
+
+state 31
+
+    (10) terms -> SEP2 - WORDS qual_term var_country . terms
+    (11) terms -> SEP2 - WORDS qual_term var_country .
+    (10) terms -> . SEP2 - WORDS qual_term var_country terms
+    (11) terms -> . SEP2 - WORDS qual_term var_country
+    (12) terms -> . SEP2 - WORDS qual_term terms
+    (13) terms -> . SEP2 - WORDS qual_term
+    (14) terms -> . SEP2 - WORDS var_country terms
+    (15) terms -> . SEP2 - WORDS var_country
+    (16) terms -> . SEP2 - WORDS terms
+    (17) terms -> . SEP2 - WORDS
+
+    ID_CONCEPT      reduce using rule 11 (terms -> SEP2 - WORDS qual_term var_country .)
+    $end            reduce using rule 11 (terms -> SEP2 - WORDS qual_term var_country .)
+    SEP2            shift and go to state 23
+
+    terms                          shift and go to state 36
+
+state 32
+
+    (12) terms -> SEP2 - WORDS qual_term terms .
+
+    ID_CONCEPT      reduce using rule 12 (terms -> SEP2 - WORDS qual_term terms .)
+    $end            reduce using rule 12 (terms -> SEP2 - WORDS qual_term terms .)
+
+
+state 33
+
+    (14) terms -> SEP2 - WORDS var_country terms .
+
+    ID_CONCEPT      reduce using rule 14 (terms -> SEP2 - WORDS var_country terms .)
+    $end            reduce using rule 14 (terms -> SEP2 - WORDS var_country terms .)
+
+
+state 34
+
+    (18) qual_term -> ( GENDER . | TYPE_TERM )
+    (19) qual_term -> ( GENDER . )
+
+    |               shift and go to state 37
+    )               shift and go to state 38
+
+
+state 35
+
+    (20) var_country -> SEP3 + . ID_COUNTRY
+
+    ID_COUNTRY      shift and go to state 39
+
+
+state 36
+
+    (10) terms -> SEP2 - WORDS qual_term var_country terms .
+
+    ID_CONCEPT      reduce using rule 10 (terms -> SEP2 - WORDS qual_term var_country terms .)
+    $end            reduce using rule 10 (terms -> SEP2 - WORDS qual_term var_country terms .)
+
+
+state 37
+
+    (18) qual_term -> ( GENDER | . TYPE_TERM )
+
+    TYPE_TERM       shift and go to state 40
+
+
+state 38
+
+    (19) qual_term -> ( GENDER ) .
+
+    SEP3            reduce using rule 19 (qual_term -> ( GENDER ) .)
+    SEP2            reduce using rule 19 (qual_term -> ( GENDER ) .)
+    ID_CONCEPT      reduce using rule 19 (qual_term -> ( GENDER ) .)
+    $end            reduce using rule 19 (qual_term -> ( GENDER ) .)
+
+
+state 39
+
+    (20) var_country -> SEP3 + ID_COUNTRY .
+
+    SEP2            reduce using rule 20 (var_country -> SEP3 + ID_COUNTRY .)
+    ID_CONCEPT      reduce using rule 20 (var_country -> SEP3 + ID_COUNTRY .)
+    $end            reduce using rule 20 (var_country -> SEP3 + ID_COUNTRY .)
+
+
+state 40
+
+    (18) qual_term -> ( GENDER | TYPE_TERM . )
+
+    )               shift and go to state 41
+
+
+state 41
+
+    (18) qual_term -> ( GENDER | TYPE_TERM ) .
+
+    SEP3            reduce using rule 18 (qual_term -> ( GENDER | TYPE_TERM ) .)
+    SEP2            reduce using rule 18 (qual_term -> ( GENDER | TYPE_TERM ) .)
+    ID_CONCEPT      reduce using rule 18 (qual_term -> ( GENDER | TYPE_TERM ) .)
+    $end            reduce using rule 18 (qual_term -> ( GENDER | TYPE_TERM ) .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for SEP in state 18 resolved as shift
